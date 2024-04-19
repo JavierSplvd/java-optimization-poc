@@ -9,7 +9,7 @@ import org.junit.Test;
 import com.numian.app.nqueens.common.domain.Column;
 import com.numian.app.nqueens.common.domain.Queen;
 import com.numian.app.nqueens.common.domain.Row;
-import com.numian.app.nqueens.timefold.dto.SolutionResponse;
+import com.numian.app.nqueens.common.dto.SolutionResponse;
 
 public class NQueensAppTest {
     @Test

@@ -5,10 +5,11 @@ import ai.timefold.solver.core.config.solver.SolverConfig;
 import com.numian.app.nqueens.common.domain.Column;
 import com.numian.app.nqueens.common.domain.Queen;
 import com.numian.app.nqueens.common.domain.Row;
+import com.numian.app.nqueens.common.dto.SolutionResponse;
 import com.numian.app.nqueens.timefold.NQueensSolution;
 import com.numian.app.nqueens.timefold.constraints.NQueensConstraintProvider;
 import com.numian.app.nqueens.timefold.domain.QueenEntity;
-import com.numian.app.nqueens.timefold.dto.SolutionResponse;
+
 import java.time.Duration;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;

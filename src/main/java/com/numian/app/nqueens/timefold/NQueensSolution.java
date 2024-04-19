@@ -12,8 +12,8 @@ import java.util.Set;
 
 import com.numian.app.nqueens.common.domain.Column;
 import com.numian.app.nqueens.common.domain.Row;
+import com.numian.app.nqueens.common.dto.SolutionResponse;
 import com.numian.app.nqueens.timefold.domain.QueenEntity;
-import com.numian.app.nqueens.timefold.dto.SolutionResponse;
 
 @PlanningSolution
 public class NQueensSolution {

@@ -1,4 +1,4 @@
-package com.numian.app.nqueens.timefold.dto;
+package com.numian.app.nqueens.common.dto;
 
 import java.util.Set;
 
