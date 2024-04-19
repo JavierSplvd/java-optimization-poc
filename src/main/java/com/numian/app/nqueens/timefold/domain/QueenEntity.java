@@ -1,12 +1,17 @@
-package com.numian.app.nqueens.entities;
+package com.numian.app.nqueens.timefold.domain;
 
 import java.util.UUID;
+
+import com.numian.app.nqueens.common.domain.Column;
+import com.numian.app.nqueens.common.domain.Queen;
+import com.numian.app.nqueens.common.domain.Row;
+
 import ai.timefold.solver.core.api.domain.entity.PlanningEntity;
 import ai.timefold.solver.core.api.domain.lookup.PlanningId;
 import ai.timefold.solver.core.api.domain.variable.PlanningVariable;
 
 @PlanningEntity
-public class Queen {
+public class QueenEntity {
 
   @PlanningId
   private String id;
@@ -17,13 +22,16 @@ public class Queen {
   @PlanningVariable
   private Row row;
 
-  public Queen(Column column, Row row) {
-    id = UUID.randomUUID().toString();
-    this.column = column;
-    this.row = row;
+  public static QueenEntity of(Queen queen) {
+    QueenEntity queenEntity = new QueenEntity();
+    queenEntity.setColumn(queen.column());
+    queenEntity.setRow(queen.row());
+    return queenEntity;
   }
 
-  public Queen() {}
+  public QueenEntity() {
+    this.id = UUID.randomUUID().toString();
+  }
 
   public int getAscendingDiagonal() {
     return column.value() + row.value();

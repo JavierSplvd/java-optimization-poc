@@ -1,4 +1,4 @@
-package com.numian.app.nqueens.model;
+package com.numian.app.nqueens.timefold;
 
 import ai.timefold.solver.core.api.domain.solution.PlanningEntityCollectionProperty;
 import ai.timefold.solver.core.api.domain.solution.PlanningScore;
@@ -6,18 +6,18 @@ import ai.timefold.solver.core.api.domain.solution.PlanningSolution;
 import ai.timefold.solver.core.api.domain.solution.ProblemFactCollectionProperty;
 import ai.timefold.solver.core.api.domain.valuerange.ValueRangeProvider;
 import ai.timefold.solver.core.api.score.buildin.hardsoft.HardSoftScore;
-import com.numian.app.nqueens.entities.Column;
-import com.numian.app.nqueens.entities.Queen;
-import com.numian.app.nqueens.entities.Row;
+
 import java.util.List;
+
+import com.numian.app.nqueens.common.domain.Column;
+import com.numian.app.nqueens.common.domain.Row;
+import com.numian.app.nqueens.timefold.domain.QueenEntity;
 
 @PlanningSolution
 public class NQueensSolution {
 
-  private final int n;
-
   @PlanningEntityCollectionProperty
-  private final List<Queen> queens;
+  private final List<QueenEntity> queens;
 
   @ValueRangeProvider
   @ProblemFactCollectionProperty
@@ -31,7 +31,6 @@ public class NQueensSolution {
   private HardSoftScore score;
 
   public NQueensSolution() {
-    this.n = 0;
     this.rows = List.of();
     this.columns = List.of();
     this.queens = List.of();
@@ -42,16 +41,15 @@ public class NQueensSolution {
     int n,
     List<Row> rows,
     List<Column> columns,
-    List<Queen> queens
+    List<QueenEntity> queens
   ) {
-    this.n = n;
     this.rows = rows;
     this.columns = columns;
     this.queens = queens;
     this.score = HardSoftScore.ZERO;
   }
 
-  public List<Queen> getQueens() {
+  public List<QueenEntity> getQueens() {
     return queens;
   }
 

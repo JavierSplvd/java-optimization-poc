@@ -1,6 +1,6 @@
 # Introduction
 
-This is a Java project to try and learn some optimization models, starting with a heuristic model using Timefold solver.
+This is a Java project to try and learn some optimization models, starting with a heuristic model using Timefold solver and OR Tools.
 
 # Solving N Queens
 

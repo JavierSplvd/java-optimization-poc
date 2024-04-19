@@ -2,11 +2,14 @@ package com.numian.app.nqueens.application;
 
 import ai.timefold.solver.core.api.solver.SolverFactory;
 import ai.timefold.solver.core.config.solver.SolverConfig;
-import com.numian.app.nqueens.entities.Column;
-import com.numian.app.nqueens.entities.Queen;
-import com.numian.app.nqueens.entities.Row;
-import com.numian.app.nqueens.model.NQueensSolution;
-import com.numian.app.nqueens.model.constraints.NQueensConstraintProvider;
+
+import com.numian.app.nqueens.common.domain.Column;
+import com.numian.app.nqueens.common.domain.Queen;
+import com.numian.app.nqueens.common.domain.Row;
+import com.numian.app.nqueens.timefold.NQueensSolution;
+import com.numian.app.nqueens.timefold.constraints.NQueensConstraintProvider;
+import com.numian.app.nqueens.timefold.domain.QueenEntity;
+
 import java.time.Duration;
 import java.util.stream.IntStream;
 
@@ -28,13 +31,13 @@ public final class NQueensApp {
       size,
       rows,
       columns,
-      queens
+      queens.stream().map(QueenEntity::of).toList()
     );
 
     SolverFactory<NQueensSolution> solverFactory = SolverFactory.create(
       new SolverConfig()
         .withSolutionClass(NQueensSolution.class)
-        .withEntityClasses(Queen.class)
+        .withEntityClasses(QueenEntity.class)
         .withConstraintProviderClass(NQueensConstraintProvider.class)
         .withTerminationSpentLimit(Duration.ofSeconds(maxSeconds))
     );
@@ -53,7 +56,7 @@ public final class NQueensApp {
     System.out.println("Score: " + score);
     for (Row row : rows) {
       for (Column column : columns) {
-        Queen queen = bestSolution
+        QueenEntity queen = bestSolution
           .getQueens()
           .stream()
           .filter(q -> q.getRow().equals(row) && q.getColumn().equals(column))
