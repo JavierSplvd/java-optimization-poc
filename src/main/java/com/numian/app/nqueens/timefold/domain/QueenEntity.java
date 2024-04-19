@@ -29,6 +29,10 @@ public class QueenEntity {
     return queenEntity;
   }
 
+  public static Queen toQueen(QueenEntity queenEntity) {
+    return new Queen(queenEntity.getColumn(), queenEntity.getRow());
+  }
+
   public QueenEntity() {
     this.id = UUID.randomUUID().toString();
   }

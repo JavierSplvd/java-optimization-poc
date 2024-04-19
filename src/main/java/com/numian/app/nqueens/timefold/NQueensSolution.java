@@ -8,10 +8,12 @@ import ai.timefold.solver.core.api.domain.valuerange.ValueRangeProvider;
 import ai.timefold.solver.core.api.score.buildin.hardsoft.HardSoftScore;
 
 import java.util.List;
+import java.util.Set;
 
 import com.numian.app.nqueens.common.domain.Column;
 import com.numian.app.nqueens.common.domain.Row;
 import com.numian.app.nqueens.timefold.domain.QueenEntity;
+import com.numian.app.nqueens.timefold.dto.SolutionResponse;
 
 @PlanningSolution
 public class NQueensSolution {
@@ -55,5 +57,9 @@ public class NQueensSolution {
 
   public String getScore() {
     return "%shard/%ssoft".formatted(score.hardScore(), score.softScore());
+  }
+
+  public SolutionResponse toResponse() {
+    return new SolutionResponse(getScore(), Set.copyOf(queens.stream().map(QueenEntity::toQueen).toList()));
   }
 }

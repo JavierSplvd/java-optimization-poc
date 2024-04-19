@@ -2,20 +2,20 @@ package com.numian.app.nqueens.application;
 
 import ai.timefold.solver.core.api.solver.SolverFactory;
 import ai.timefold.solver.core.config.solver.SolverConfig;
-
 import com.numian.app.nqueens.common.domain.Column;
 import com.numian.app.nqueens.common.domain.Queen;
 import com.numian.app.nqueens.common.domain.Row;
 import com.numian.app.nqueens.timefold.NQueensSolution;
 import com.numian.app.nqueens.timefold.constraints.NQueensConstraintProvider;
 import com.numian.app.nqueens.timefold.domain.QueenEntity;
-
+import com.numian.app.nqueens.timefold.dto.SolutionResponse;
 import java.time.Duration;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public final class NQueensApp {
 
-  public String solve(int size, int maxSeconds) {
+  public SolutionResponse solve(int size, int maxSeconds) {
     var rows = IntStream.rangeClosed(1, size).boxed().map(Row::new).toList();
     var columns = IntStream
       .rangeClosed(1, size)
@@ -45,13 +45,6 @@ public final class NQueensApp {
     var solver = solverFactory.buildSolver();
     NQueensSolution bestSolution = solver.solve(initialSolution);
     String score = bestSolution.getScore();
-    String queensPositions = bestSolution
-      .getQueens()
-      .stream()
-      .map(queen ->
-        "<c" + queen.getColumn().value() + ",r" + queen.getRow().value() + ">"
-      )
-      .reduce("", (acc, pos) -> acc + pos + " ");
 
     System.out.println("Score: " + score);
     for (Row row : rows) {
@@ -70,6 +63,13 @@ public final class NQueensApp {
       }
       System.out.println();
     }
-    return score + "," + queensPositions;
+    return new SolutionResponse(
+      score,
+      bestSolution
+        .getQueens()
+        .stream()
+        .map(QueenEntity::toQueen)
+        .collect(Collectors.toSet())
+    );
   }
 }

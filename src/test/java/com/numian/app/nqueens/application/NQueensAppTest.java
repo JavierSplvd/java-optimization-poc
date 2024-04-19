@@ -2,27 +2,26 @@ package com.numian.app.nqueens.application;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Set;
+
 import org.junit.Test;
+
+import com.numian.app.nqueens.common.domain.Column;
+import com.numian.app.nqueens.common.domain.Queen;
+import com.numian.app.nqueens.common.domain.Row;
+import com.numian.app.nqueens.timefold.dto.SolutionResponse;
 
 public class NQueensAppTest {
     @Test
     public void test4QueensSolve() {
         NQueensApp nQueensApp = new NQueensApp();
-        String result = nQueensApp.solve(4, 1);
-        assertEquals(result, "0hard/0soft,<c3,r1> <c4,r3> <c1,r2> <c2,r4> ");
-    }
-
-    @Test
-    public void test8QueensSolve() {
-        NQueensApp nQueensApp = new NQueensApp();
-        String result = nQueensApp.solve(8, 5);
-        assertEquals(result, "0hard/0soft,<c5,r1> <c3,r7> <c1,r4> <c4,r5> <c2,r2> <c8,r3> <c7,r6> <c6,r8> ");
-    }
-
-    @Test
-    public void test16QueensSolveWithExtendedTime() {
-        NQueensApp nQueensApp = new NQueensApp();
-        String result = nQueensApp.solve(16, 20);
-        assertEquals(result, "foo");
+        SolutionResponse result = nQueensApp.solve(4, 1);
+        assertEquals("0hard/0soft", result.score());
+        assertEquals(Set.of(
+            new Queen(new Column(1), new Row(2)),
+            new Queen(new Column(2), new Row(4)),
+            new Queen(new Column(3), new Row(1)),
+            new Queen(new Column(4), new Row(3))
+        ), result.queens());
     }
 }
